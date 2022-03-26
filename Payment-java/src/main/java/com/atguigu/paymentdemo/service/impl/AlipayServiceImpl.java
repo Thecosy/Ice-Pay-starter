@@ -48,6 +48,9 @@ public class AlipayServiceImpl implements AlipayService {
     private PaymentInfoMapper paymentInfoMapper;
 
     @Autowired
+    private AlipayConfig alipayConfig;
+
+    @Autowired
     private RefundInfoService refundInfoService;
 
     @Autowired
@@ -77,9 +80,9 @@ public class AlipayServiceImpl implements AlipayService {
 
         // 填充 alipayClientEntity
         AlipayClientEntity alipayClientEntity = new AlipayClientEntity();
-        alipayClientEntity.setAppId(AlipayConfig.APP_ID);
-        alipayClientEntity.setPrivateKey(AlipayConfig.PRIVATE_KEY);
-        alipayClientEntity.setAlipayPublicKey(AlipayConfig.ALIPAY_PUBLIC_KEY);
+        alipayClientEntity.setAppId(alipayConfig.getAPP_ID());
+        alipayClientEntity.setPrivateKey(alipayConfig.getPRIVATE_KEY());
+        alipayClientEntity.setAlipayPublicKey(alipayConfig.getALIPAY_PUBLIC_KEY());
         //把元为单位转化为分为单位
         double orderprice = orderInfo.getTotalFee();
         String price = String.valueOf(orderprice/100);//价格 单位:分
@@ -88,7 +91,7 @@ public class AlipayServiceImpl implements AlipayService {
         alipayTradeInfoEntity.setOutTradeNo(orderInfo.getOrderNo());//订单号
         alipayTradeInfoEntity.setTotalAmount(price);
         alipayTradeInfoEntity.setSubject(orderInfo.getTitle());
-        alipayTradeInfoEntity.setTimeoutExpress(AlipayConfig.TIMEOUT_EXPRESS);
+        alipayTradeInfoEntity.setTimeoutExpress(alipayConfig.getTIMEOUT_EXPRESS());
 
         codeUrl = buildAlipayUrl(alipayClientEntity,alipayTradeInfoEntity);
 
@@ -117,7 +120,7 @@ public class AlipayServiceImpl implements AlipayService {
         //TODO
 //        alipayRequest.setNotifyUrl(AlipayConstant.NOTIFY_URL);
 //          wxPayConfig.getNotifyDomain().concat(WxNotifyType.NATIVE_NOTIFY.getType())
-        alipayRequest.setNotifyUrl(AlipayConfig.NOTIFY_URL.concat(AliNotifyType.FTOF_PAY.getType()));
+        alipayRequest.setNotifyUrl(alipayConfig.getNOTIFY_URL().concat(AliNotifyType.FTOF_PAY.getType()));
         // 调用接口
         AlipayTradePrecreateResponse alipayResponse = client.execute(alipayRequest);
         Objects.requireNonNull(alipayResponse,"client.execute(alipayRequest) 是空的");
@@ -159,8 +162,8 @@ public class AlipayServiceImpl implements AlipayService {
         // 二维码生成对应的类
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest ();
         alipayRequest.setBizContent(postdata);
-        alipayRequest.setNotifyUrl(AlipayConfig.NOTIFY_URL);
-        alipayRequest.setReturnUrl(AlipayConfig.RETURN_URL);
+        alipayRequest.setNotifyUrl(alipayConfig.getNOTIFY_URL());
+        alipayRequest.setReturnUrl(alipayConfig.getRETURN_URL());
 
         // 调用接口
         AlipayTradePagePayResponse response = client.pageExecute(alipayRequest);
@@ -348,9 +351,9 @@ public class AlipayServiceImpl implements AlipayService {
 
         try {
             //实例化客户端（参数：网关地址、商户appid、商户私钥、格式、编码、支付宝公钥、加密类型）
-            AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALI_URL, AlipayConfig.APP_ID,
-                    AlipayConfig.PRIVATE_KEY, "json","GBK",
-                    AlipayConfig.ALIPAY_PUBLIC_KEY,"RSA2");
+            AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig.getALI_URL(), alipayConfig.getAPP_ID(),
+                    alipayConfig.getPRIVATE_KEY(), "json","GBK",
+                    alipayConfig.getALIPAY_PUBLIC_KEY(),"RSA2");
             AlipayTradeQueryRequest alipayTradeQueryRequest = new AlipayTradeQueryRequest();
             alipayTradeQueryRequest.setBizContent("{" +
                     "\"out_trade_no\":\""+orderNo+"\"" +
@@ -423,9 +426,9 @@ public class AlipayServiceImpl implements AlipayService {
 
         log.info("关单接口的调用，订单号 ===> {}", orderNo);
 
-        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALI_URL, AlipayConfig.APP_ID,
-                AlipayConfig.PRIVATE_KEY, "json","GBK",
-                AlipayConfig.ALIPAY_PUBLIC_KEY,"RSA2");
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig.getALI_URL(), alipayConfig.getAPP_ID(),
+                alipayConfig.getPRIVATE_KEY(), "json","GBK",
+                alipayConfig.getALIPAY_PUBLIC_KEY(),"RSA2");
         AlipayTradeCloseRequest request = new AlipayTradeCloseRequest();
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", orderNo);
@@ -456,9 +459,9 @@ public class AlipayServiceImpl implements AlipayService {
         log.info("调用退款API");
 
         //调用统一退款API
-        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALI_URL, AlipayConfig.APP_ID,
-                AlipayConfig.PRIVATE_KEY, "json","GBK",
-                AlipayConfig.ALIPAY_PUBLIC_KEY,"RSA2" );
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig.getALI_URL(), alipayConfig.getAPP_ID(),
+                alipayConfig.getPRIVATE_KEY(), "json","GBK",
+                alipayConfig.getALIPAY_PUBLIC_KEY(),"RSA2" );
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", orderNo);
@@ -504,9 +507,9 @@ public class AlipayServiceImpl implements AlipayService {
         objectQueryWrapper.eq("order_no",refundNo);
         RefundInfo refundsInfo = refundInfoService.getOne(objectQueryWrapper);
 
-        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.ALI_URL, AlipayConfig.APP_ID,
-                AlipayConfig.PRIVATE_KEY, "json","GBK",
-                AlipayConfig.ALIPAY_PUBLIC_KEY,"RSA2" );
+        AlipayClient alipayClient = new DefaultAlipayClient(alipayConfig.getALI_URL(), alipayConfig.getAPP_ID(),
+                alipayConfig.getPRIVATE_KEY(), "json","GBK",
+                alipayConfig.getALIPAY_PUBLIC_KEY(),"RSA2" );
         AlipayTradeFastpayRefundQueryRequest request = new AlipayTradeFastpayRefundQueryRequest();
         JSONObject bizContent = new JSONObject();
         bizContent.put("out_trade_no", refundNo);

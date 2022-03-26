@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +19,7 @@ import java.security.PrivateKey;
 
 
 @Configuration
+@Component
 @PropertySource("classpath:wxpay.properties")
 //读取配置文件
 @ConfigurationProperties(prefix="wxpay") //读取wxpay节点

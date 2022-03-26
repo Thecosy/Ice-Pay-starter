@@ -1,12 +1,105 @@
 {
   "groups": [
     {
+      "name": "alipay",
+      "type": "com.atguigu.paymentdemo.config.AlipayConfig",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
       "name": "wxpay",
       "type": "com.atguigu.paymentdemo.config.WxPayConfig",
       "sourceType": "com.atguigu.paymentdemo.config.WxPayConfig"
     }
   ],
   "properties": [
+    {
+      "name": "alipay.a-l-i-p-a-y-p-u-b-l-i-c-k-e-y",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.a-l-i-p-a-y-p-u-b-l-i-c-k-e-y",
+      "type": "java.lang.String",
+      "description": "AliPay公钥",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.a-l-i-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.a-l-i-u-r-l",
+      "type": "java.lang.String",
+      "description": "请求支付宝服务器网关域名(沙箱)",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.a-p-p-i-d",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.a-p-p-i-d",
+      "type": "java.lang.String",
+      "description": "收款账户的app_id",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.n-o-t-i-f-y-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.n-o-t-i-f-y-u-r-l",
+      "type": "java.lang.String",
+      "description": "异步回调地址",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.p-r-i-v-a-t-e-k-e-y",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.p-r-i-v-a-t-e-k-e-y",
+      "type": "java.lang.String",
+      "description": "收款账户私钥",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.p-u-b-l-i-c-k-e-y",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.p-u-b-l-i-c-k-e-y",
+      "type": "java.lang.String",
+      "description": "收款账户公钥",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.r-e-t-u-r-n-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.r-e-t-u-r-n-u-r-l",
+      "type": "java.lang.String",
+      "description": "同步回调地址",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.t-i-m-e-o-u-t-e-x-p-r-e-s-s",
+      "type": "java.lang.String",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
+    {
+      "name": "alipay.t-i-m-e-o-u-t-e-x-p-r-e-s-s",
+      "type": "java.lang.String",
+      "description": "该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）",
+      "sourceType": "com.atguigu.paymentdemo.config.AlipayConfig"
+    },
     {
       "name": "wxpay.api-v3-key",
       "type": "java.lang.String",

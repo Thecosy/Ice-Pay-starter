@@ -32,6 +32,9 @@ public class AlipayForQrcodeController {
     @Autowired
     private AlipayService alipayService;
 
+    @Autowired
+    private AlipayConfig alipayConfig;
+
     /**
      * @description : 生成支付宝二维码
      * @author : Jiaxl
@@ -74,7 +77,7 @@ public class AlipayForQrcodeController {
     public void alipayReturn(HttpServletRequest request, HttpServletResponse response) {
         // 填充 alipayClientEntity
         AlipayClientEntity alipayClientEntity = new AlipayClientEntity();
-        alipayClientEntity.setAlipayPublicKey(AlipayConfig.ALIPAY_PUBLIC_KEY);
+        alipayClientEntity.setAlipayPublicKey(alipayConfig.getALIPAY_PUBLIC_KEY());
         try {
             // 验证签名订单是否为当前用户的
             if(alipayService.alipayCheckSign(request, alipayClientEntity)){
@@ -113,7 +116,7 @@ public class AlipayForQrcodeController {
     public void alipayNotify(HttpServletRequest request, HttpServletResponse response) {
         // 填充 alipayClientEntity
         AlipayClientEntity alipayClientEntity = new AlipayClientEntity();
-        alipayClientEntity.setAlipayPublicKey(AlipayConfig.ALIPAY_PUBLIC_KEY);
+        alipayClientEntity.setAlipayPublicKey(alipayConfig.getALIPAY_PUBLIC_KEY());
         try {
             // 验证签名订单是否为当前用户的
             if(alipayService.alipayCheckSign(request, alipayClientEntity)){

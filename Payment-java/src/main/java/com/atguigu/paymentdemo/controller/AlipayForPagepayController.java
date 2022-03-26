@@ -2,6 +2,7 @@ package com.atguigu.paymentdemo.controller;
 
 
 import com.atguigu.paymentdemo.config.AlipayConfig;
+import com.atguigu.paymentdemo.config.WxPayConfig;
 import com.atguigu.paymentdemo.entity.AlipayClientEntity;
 import com.atguigu.paymentdemo.entity.AlipayTradeInfoEntity;
 import com.atguigu.paymentdemo.service.AlipayService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author ：Jiaxl
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin //开放前端的跨域访问
 @RestController
 public class AlipayForPagepayController {
+
+    @Resource
+    private AlipayConfig aliPayConfig;
 
     @Autowired
     private AlipayService alipayService;
@@ -33,9 +39,9 @@ public class AlipayForPagepayController {
 
         // 填充 alipayClientEntity
         AlipayClientEntity alipayClientEntity = new AlipayClientEntity();
-        alipayClientEntity.setAppId(AlipayConfig.APP_ID);
-        alipayClientEntity.setPrivateKey(AlipayConfig.PRIVATE_KEY);
-        alipayClientEntity.setAlipayPublicKey(AlipayConfig.ALIPAY_PUBLIC_KEY);
+        alipayClientEntity.setAppId(aliPayConfig.getAPP_ID());
+        alipayClientEntity.setPrivateKey(aliPayConfig.getPRIVATE_KEY());
+        alipayClientEntity.setAlipayPublicKey(aliPayConfig.getALIPAY_PUBLIC_KEY());
 
         // 填充商品信息
         /*
@@ -56,7 +62,7 @@ public class AlipayForPagepayController {
         alipayTradeInfoEntity.setOutTradeNo(String.valueOf(System.currentTimeMillis()));
         alipayTradeInfoEntity.setTotalAmount("0.11");
         alipayTradeInfoEntity.setSubject("B2019122022873");
-        alipayTradeInfoEntity.setTimeoutExpress(AlipayConfig.TIMEOUT_EXPRESS);
+        alipayTradeInfoEntity.setTimeoutExpress(aliPayConfig.getTIMEOUT_EXPRESS());
         alipayTradeInfoEntity.setProductCode("FAST_INSTANT_TRADE_PAY");
         alipayTradeInfoEntity.setBody("11111111111");
         /*alipayTradeInfoEntity.setGoodsDetailList(goodsList);*/
