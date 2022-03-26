@@ -1,0 +1,47 @@
+server:
+  port: 8092 #服务端口
+
+spring:
+  application:
+    name: payment-demo #应用的名字
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/payment_demo?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: Fuck258!
+
+mybatis-plus:
+  configuration: #sql日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/atguigu/paymentdemo/mapper/xml/*.xml
+
+logging:
+  level:
+    root: info
+#
+#alipay:
+#  # 微信支付相关参数
+#  # 商户号
+#  wxpay.mch-id: 1610742906
+#  # 商户API证书序列号
+#  wxpay.mch-serial-no: 1F6ED9CC7D6CB346909C7D8C230F6F9DA4C91929
+#
+#  # 商户私钥文件
+#  wxpay.private-key-path: apiclient_key.pem
+#  # APIv3密钥
+#  wxpay.api-v3-key: GZLH3yKVqaYX6xll0eH0grWm2RzRdY2c
+#  # APPID
+#  wxpay.appid: wxe8abca8c68efe7c7
+#  # 微信服务器地址
+#  wxpay.domain: https://api.mch.weixin.qq.com
+#  # 接收结果通知地址
+#  # 注意：每次重新启动ngrok，都需要根据实际情况修改这个配置
+#  wxpay.notify-domain: https://500c-219-143-130-12.ngrok.io
+#
+#  # APIv2密钥
+#  wxpay.partnerKey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
