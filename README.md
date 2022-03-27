@@ -34,7 +34,7 @@ npm run serve
 
 2.部署Payment-java文件夹内部的sql自动数据库脚本
 
-3.允许项目
+3.运行项目
 
 ###### 支付教程 
 
